@@ -154,9 +154,15 @@ if (existsSync(resolve(docsRoot, 'mcmc'))) errors.push('obsolete docs/mcmc direc
 if (existsSync(resolve(root, '.openai', 'hosting.json'))) errors.push('Sites hosting configuration is forbidden')
 
 const forbiddenExtensions = new Set((policy.forbiddenExtensions ?? []).map((item) => item.toLowerCase()))
+const allowedPdfPaths = new Set(
+  (policy.additionalPublicAssets ?? [])
+    .map(publicRelativePath)
+    .filter((path) => extname(path).toLowerCase() === '.pdf')
+    .map((path) => `public/${path}`),
+)
 for (const file of files) {
   const relativeFile = relativeToDocs(file)
-  if (forbiddenExtensions.has(extname(file).toLowerCase())) {
+  if (forbiddenExtensions.has(extname(file).toLowerCase()) && !allowedPdfPaths.has(relativeFile)) {
     errors.push(`forbidden extension in public documentation: ${relativeFile}`)
   }
   const extension = extname(file).toLowerCase()

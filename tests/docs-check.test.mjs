@@ -119,6 +119,28 @@ test('rejects forbidden paper source and non-allowlisted posterior assets', () =
   }
 })
 
+test('publishes only explicitly allowlisted PDFs', () => {
+  const root = createFixture()
+  try {
+    const policyPath = join(root, 'docs/public-boundary.json')
+    const policy = JSON.parse(readFileSync(policyPath, 'utf8'))
+    policy.forbiddenExtensions.push('.pdf')
+    policy.additionalPublicAssets.push('paper/allowed.pdf')
+    writeFileSync(policyPath, JSON.stringify(policy))
+    write(root, 'docs/public/paper/allowed.pdf', 'allowed PDF')
+
+    const allowed = runCheck(root)
+    assert.equal(allowed.status, 0, `${allowed.stdout}\n${allowed.stderr}`)
+
+    write(root, 'docs/public/paper/unlisted.pdf', 'unlisted PDF')
+    const unlisted = runCheck(root)
+    assert.notEqual(unlisted.status, 0)
+    assert.match(`${unlisted.stdout}\n${unlisted.stderr}`, /forbidden extension.*unlisted\.pdf/i)
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
 test('rejects case-study assets that are absent from provenance', () => {
   const root = createFixture()
   try {

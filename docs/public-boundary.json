@@ -64,6 +64,7 @@
   "provenanceManifest": "public/meta/case-study-provenance.json",
   "summaryManifest": "public/meta/case-study-summaries.json",
   "additionalPublicAssets": [
+    "paper/Local_Concentration__Mass_Relation_from_MaNGA.pdf",
     "assets/home/manga-telescope.png",
     "assets/home/manga-telescope.webp",
     "assets/home/manga-telescope-mobile.webp",
