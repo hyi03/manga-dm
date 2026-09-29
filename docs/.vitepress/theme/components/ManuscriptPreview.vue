@@ -8,14 +8,14 @@ const manuscriptPages = [
     src: '/assets/manuscript-preview/manuscript-page-01.webp',
   },
   {
-    page: '04',
-    title: 'Analytic mass model',
-    src: '/assets/manuscript-preview/manuscript-page-04.webp',
+    page: '02',
+    title: 'Data and sample selection',
+    src: '/assets/manuscript-preview/manuscript-page-02.webp',
   },
   {
-    page: '06',
-    title: 'Priors and population model',
-    src: '/assets/manuscript-preview/manuscript-page-06.webp',
+    page: '03',
+    title: 'Rotation curves and mass model',
+    src: '/assets/manuscript-preview/manuscript-page-03.webp',
   },
 ]
 </script>

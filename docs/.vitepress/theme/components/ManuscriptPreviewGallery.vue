@@ -6,7 +6,7 @@ const pages = Array.from({ length: 14 }, (_, index) => {
   return {
     number,
     src: `/assets/manuscript-preview/manuscript-page-${number}.webp`,
-    isFullPreview: number === '01',
+    isFullPreview: index < 3,
   }
 })
 </script>
@@ -16,7 +16,7 @@ const pages = Array.from({ length: 14 }, (_, index) => {
     <figure v-for="page in pages" :key="page.number" class="manuscript-page-gallery__item">
       <img
         :src="withBase(page.src)"
-        :alt="`Draft manuscript page ${page.number}. ${page.isFullPreview ? 'Full preview.' : 'Only the top third is readable; the remainder is irreversibly blurred.'}`"
+        :alt="`Draft manuscript page ${page.number}. ${page.isFullPreview ? 'Full preview.' : 'The lower half is irreversibly blurred.'}`"
         loading="lazy"
       >
     </figure>
